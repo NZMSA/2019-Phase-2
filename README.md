@@ -32,7 +32,7 @@ If you do not have this software installed, MSPs have clear instructions to NOT 
 * Visual Studio Community 2017
 * When installing ensure ASP.NET and web development is selected
 * Azure Account
-* .NET Core 2.1 SDK or later
+* .NET Core 2.2 SDK
 * Optional - DB Browser for SQLite
 * [Visual Studio Code](https://code.visualstudio.com/download)
 * [NodeJS](https://nodejs.org/en/download/)
