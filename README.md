@@ -46,7 +46,7 @@ Please ensure you are registered and have ACCESS to the following services. Agai
 
 ## Microsoft Azure Subscription
 
-All students should have this from Basic Training, to check, visit the [Microsoft Azure Portal](http://portal.azure.com) and check the Subscriptions tab to ensure you have either a "Dreamspark" or "Imagine" subscription listed.
+All students should have this from Basic Training, to check, visit the [Microsoft Azure Portal](http://portal.azure.com) and check the Subscriptions tab to ensure you have "Dreamspark"/"Imagine"/"Azure for Students" subscription listed.
 
 If you don't, then visit [Microsoft Azure](https://azure.microsoft.com/en-us/free/students/) to register yourself as a student, verify and activate Azure through the links on the site.
 
