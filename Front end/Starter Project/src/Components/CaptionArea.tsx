@@ -20,10 +20,39 @@ export default class CaptionArea extends React.Component<IProps, IState>{
         super(props);
     }
 
+    public search = () => {
+
+    }
+
     public render() {
         return (
             <div className="caption-area">
-
+                <div className="caption-area">
+                <div className="row">
+                    <div className="col-2 justify-content-center align-self-center">
+                        <h1><span className="red-heading">search</span>caption</h1>
+                    </div>
+                    <div className="col-10">
+                        
+                        <TextField
+                            id="Search-Bar"
+                            className="SearchBar"
+                            placeholder="Search Captions"
+                            margin="normal"
+                            variant="outlined"
+                            onChange={(event: any) => this.setState({ input: event.target.value })}
+                            value={this.state.input}
+                            InputProps={{
+                                endAdornment: <InputAdornment position="end">
+                                    <IconButton onClick={() => this.search()}>
+                                        <Search />
+                                    </IconButton>
+                                </InputAdornment>
+                            }}
+                        />
+                    </div>
+                </div>
+                <br/>
             </div>
         )
     }
