@@ -18,10 +18,28 @@ interface IProps {
 export default class CaptionArea extends React.Component<IProps, IState>{
     public constructor(props: any) {
         super(props);
+        this.state = {
+            input:"",
+            result:[],
+            body:[],
+        }
     }
 
     public search = () => {
-        return ""
+        if(this.state.input.trim() === ""){
+            this.setState({result:[]},()=>{/** handle update */})
+        }else{
+            fetch("https://scriberapi.azurewebsites.net/api/Videos/SearchByTranscriptions/"+this.state.input,{
+                headers:{
+                    Accept:"text/plain"
+                },
+                method:"GET"
+            }).then((response:any)=>{
+                return response.json()
+            }).then((response:any)=>{
+                this.setState({result:response},()=>this.makeTableBody())
+            })
+        }
     }
 
     public render() {
