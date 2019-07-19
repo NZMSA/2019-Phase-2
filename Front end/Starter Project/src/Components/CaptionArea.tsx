@@ -21,7 +21,7 @@ export default class CaptionArea extends React.Component<IProps, IState>{
     }
 
     public search = () => {
-
+        return ""
     }
 
     public render() {
@@ -53,6 +53,7 @@ export default class CaptionArea extends React.Component<IProps, IState>{
                     </div>
                 </div>
                 <br/>
+                hello
             </div>
         )
     }
