@@ -6,12 +6,19 @@ import VideoList from 'src/Components/VideoList';
 import 'src/App.css'
 
 interface IState {
-
+    playingUrl:any
 }
 
 class App extends React.Component<{}, IState>{
   public constructor(props: any) {
     super(props);
+    this.state = {
+      playingUrl:""
+    }
+  }
+
+  public addVideo = (url:any) =>{
+    
   }
 
 
@@ -39,7 +46,7 @@ class App extends React.Component<{}, IState>{
             />
           </div>
           <div className="col-5">
-            {/* */}
+            <VideoList play = {}
           </div>
         </div>
         {/* */}

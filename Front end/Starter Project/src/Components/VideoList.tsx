@@ -29,10 +29,10 @@ export default class VideoList extends React.Component<IProps,IState>{
             const output:any[] = []
             response.forEach((video:any) => {
                 const row = (<tr>
-                    <td onClick={() => this.handleLike(video)}>{video.isFavourite === true?<Star/>:<StarBorder/>}</td>
-                    <td onClick={() => this.props.play(video.webUrl)}><img src={video.thumbnailUrl}/></td>
-                    <td onClick={() => this.props.play(video.webUrl)}>{video.videoTitle}</td>
-                    <td onClick={() => this.deleteVideo(video.videoId)}><Close/></td>                    
+                    <td className="align-middle" onClick={() => this.handleLike(video)}>{video.isFavourite === true?<Star/>:<StarBorder/>}</td>
+                    <td className="align-middle" onClick={() => this.props.play(video.webUrl)}><img src={video.thumbnailUrl}/></td>
+                    <td className="align-middle" onClick={() => this.props.play(video.webUrl)}>{video.videoTitle}</td>
+                    <td className="align-middle" onClick={() => this.deleteVideo(video.videoId)}><Close/></td>                    
                     </tr>)
                 if(video.isFavourite){
                     output.unshift(row);
