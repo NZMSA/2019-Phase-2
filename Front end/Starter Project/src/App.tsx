@@ -29,8 +29,16 @@ class App extends React.Component<{}, IState>{
       },
       method:"POST"
     }).then(()=>{
-      //Update the videolist
+      this.state.updateVideoList()
     })
+  }
+
+  public updateURL = (url:string) => {
+    if(this.state.playingUrl === url){
+      this.setState({playingUrl:""},()=>this.setState({playingUrl:url}))
+    }else{
+      this.setState({playingUrl:url})
+    }
   }
 
   public videoList = (callback:any) => {
@@ -46,9 +54,8 @@ class App extends React.Component<{}, IState>{
           <div className="col-7">
             <ReactPlayer
               className="player"
-              ref={this.setRef}
               controls={true}
-              url={this.state.playingURL}
+              url={this.state.playingUrl}
               width="100%"
               height="400px"
               playing={true}
@@ -62,7 +69,7 @@ class App extends React.Component<{}, IState>{
             />
           </div>
           <div className="col-5">
-            <VideoList play = {}
+            <VideoList play = {this.updateURL} mount={this.videoList}/>
           </div>
         </div>
         {/* */}
