@@ -27,7 +27,7 @@ export default class VideoList extends React.Component<IProps,IState>{
             return response.json();
         }).then((response:any)=>{
             const output:any[] = []
-            response.forEach(video => {
+            response.forEach((video:any) => {
                 const row = (<tr>
                     <td onClick={/** handle like */}>{video.isFavourite === true?<Star/>:<StarBorder/>}</td>
                     <td onClick={() => this.props.play(video.webUrl)}><img src={video.thumbnailUrl}/></td>
@@ -52,12 +52,15 @@ export default class VideoList extends React.Component<IProps,IState>{
         })
     }
 
-    
+
 
     public render() {
         return (
             <div className="video-list">
-
+            <h1 className="play-heading"><span className="red-heading">play</span>video</h1>
+            <table className="table">
+                {this.state.videoList}
+            </table>
             </div>
         )
     }
