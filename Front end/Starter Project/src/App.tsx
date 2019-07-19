@@ -6,19 +6,35 @@ import VideoList from 'src/Components/VideoList';
 import 'src/App.css'
 
 interface IState {
-    playingUrl:any
+    playingUrl:any,
+    updateVideoList:any,
 }
 
 class App extends React.Component<{}, IState>{
   public constructor(props: any) {
     super(props);
     this.state = {
-      playingUrl:""
+      playingUrl:"",
+      updateVideoList:null,
     }
   }
 
   public addVideo = (url:any) =>{
-    
+    const body = {"url":url}
+    fetch("https://scriberapi.azurewebsites.net/api/Videos",{
+      body:JSON.stringify(body),
+      headers:{
+        Accept:"text/plain",
+        "Content-Type":"application/json"
+      },
+      method:"POST"
+    }).then(()=>{
+      //Update the videolist
+    })
+  }
+
+  public videoList = (callback:any) => {
+    this.setState({updateVideoList:callback})
   }
 
 
