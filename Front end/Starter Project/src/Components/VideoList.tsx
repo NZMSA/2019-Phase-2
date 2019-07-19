@@ -29,7 +29,7 @@ export default class VideoList extends React.Component<IProps,IState>{
             const output:any[] = []
             response.forEach((video:any) => {
                 const row = (<tr>
-                    <td onClick={/** handle like */}>{video.isFavourite === true?<Star/>:<StarBorder/>}</td>
+                    <td onClick={() => this.handleLike(video)}>{video.isFavourite === true?<Star/>:<StarBorder/>}</td>
                     <td onClick={() => this.props.play(video.webUrl)}><img src={video.thumbnailUrl}/></td>
                     <td onClick={() => this.props.play(video.webUrl)}>{video.videoTitle}</td>
                     <td onClick={() => this.deleteVideo(video.videoId)}><Close/></td>                    
@@ -52,7 +52,22 @@ export default class VideoList extends React.Component<IProps,IState>{
         })
     }
 
-
+    public handleLike = (video:any) =>{
+        const toSend = [{
+            "from":"",
+            "op":"replace",
+            "path":"/isFavourite",
+            "value":!video.isFavourite,
+        }]
+        fetch("https://scriberapi.azurewebsites.net/api/Videos/update/"+video.videoId,{
+            body:JSON.stringify(toSend),
+            headers: {
+                Accept: "text/plain",
+                "Content-Type":"application/json-patch+json"
+            },
+            method:"PATCH"
+        }).then(()=>{this.updateList()})
+    }
 
     public render() {
         return (
