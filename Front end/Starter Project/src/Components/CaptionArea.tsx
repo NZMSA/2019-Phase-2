@@ -55,7 +55,20 @@ export default class CaptionArea extends React.Component<IProps, IState>{
                 return a.videoTitle.localeCompare(b.videoTitle);
             }
         })
+        this.state.result.forEach((video:any) => {
+            video.transcription.forEach((caption:any) => {
+                toRet.push(
+                    <tr onClick={()=>this.handleClick(video.webUrl,caption.startTime)}>
+                        <td>{caption.startTime}</td>
+                        <td>{caption.phrase}</td>
+                        <td>{video.videoTitle}</td>
+                    </tr>
+                )
+            });
+        });
     }
+
+    
 
     public render() {
         return (
