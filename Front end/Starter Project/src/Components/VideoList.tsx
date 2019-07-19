@@ -32,11 +32,15 @@ export default class VideoList extends React.Component<IProps,IState>{
                     <td onClick={() => this.props.play(video.webUrl)}><img src={video.thumbnailUrl}/></td>
                     <td onClick={() => this.props.play(video.webUrl)}>{video.videoTitle}</td>
                     <td onClick={() => this.deleteVideo(video.videoId)}><Close/></td>                    
-                    </tr>
-                    }
-                </tr>)
+                    </tr>)
+                if(video.isFavourite){
+                    output.unshift(row);
+                }else{
+                    output.push(row);
+                }
+            })
+            this.setState({videoList:output})
             });
-        })
     }
 
     public render() {
