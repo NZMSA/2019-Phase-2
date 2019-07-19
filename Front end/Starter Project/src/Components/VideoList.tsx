@@ -35,7 +35,7 @@ export default class VideoList extends React.Component<IProps,IState>{
             response.forEach((video:any) => {
                 const row = (<tr>
                     <td className="align-middle" onClick={() => this.handleLike(video)}>{video.isFavourite === true?<Star/>:<StarBorder/>}</td>
-                    <td className="align-middle" onClick={() => this.props.play(video.webUrl)}><img src={video.thumbnailUrl}/></td>
+                    <td className="align-middle" onClick={() => this.props.play(video.webUrl)}><img src={video.thumbnailUrl} width="100px"/></td>
                     <td className="align-middle" onClick={() => this.props.play(video.webUrl)}>{video.videoTitle}</td>
                     <td className="align-middle" onClick={() => this.deleteVideo(video.videoId)}><Close/></td>                    
                     </tr>)
