@@ -8,7 +8,8 @@ interface IState{
 }
 
 interface IProps{
-    play:any
+    play:any,
+    mount:any,
 }
 
 export default class VideoList extends React.Component<IProps,IState>{
@@ -18,6 +19,10 @@ export default class VideoList extends React.Component<IProps,IState>{
             videoList: [],
         }
         this.updateList();
+    }
+
+    public componentDidMount = () =>{
+        this.props.mount(this.updateList)
     }
 
     public updateList = () => {
