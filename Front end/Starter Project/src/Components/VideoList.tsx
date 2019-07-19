@@ -17,6 +17,7 @@ export default class VideoList extends React.Component<IProps,IState>{
         this.state = {
             videoList: [],
         }
+        this.updateList();
     }
 
     public updateList = () => {
@@ -42,6 +43,16 @@ export default class VideoList extends React.Component<IProps,IState>{
             this.setState({videoList:output})
             });
     }
+
+    public deleteVideo = (id:any) => {
+        fetch("https://scriberapi.azurewebsites.net/api/Videos/"+id,{
+            method:"DELETE"
+        }).then(()=>{
+            this.updateList()
+        })
+    }
+
+    
 
     public render() {
         return (
