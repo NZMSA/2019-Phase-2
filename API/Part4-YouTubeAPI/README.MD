@@ -43,7 +43,7 @@ namespace ScribrAPI.Helper
             Console.ReadLine();
         }
 
-        public static void GetVideoIdFromURL(String videoURL)
+        public static String GetVideoIdFromURL(String videoURL)
         {
             // TODO - Extract the video id from the video link.
             return videoURL;
