@@ -27,7 +27,7 @@ export default class CaptionArea extends React.Component<IProps, IState>{
 
     public search = () => {
         if(this.state.input.trim() === ""){
-            this.setState({result:[]},()=>{/** handle update */})
+            this.setState({result:[]},()=>this.makeTableBody())
         }else{
             fetch("https://scriberapi.azurewebsites.net/api/Videos/SearchByTranscriptions/"+this.state.input,{
                 headers:{
@@ -40,6 +40,21 @@ export default class CaptionArea extends React.Component<IProps, IState>{
                 this.setState({result:response},()=>this.makeTableBody())
             })
         }
+    }
+
+    public makeTableBody = () =>{
+        const toRet: any[] = []
+        this.state.result.sort((a:any,b:any)=>{
+            if(a.webUrl === b.webUrl){
+                return 0;
+            }else if(a.webUrl === this.props.currentVideo){
+                return -1;
+            }else if(b.webUrl === this.props.currentVideo){
+                return 1;
+            }else{
+                return a.videoTitle.localeCompare(b.videoTitle);
+            }
+        })
     }
 
     public render() {
