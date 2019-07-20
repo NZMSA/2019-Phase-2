@@ -244,7 +244,7 @@ So we know that a video is added when ``addVideo`` method in ``App.tsx`` is invo
 ```
 
 
-. Here in ``App.tsx`` we can define ``.on("UpdateVideoList", () => {`` method, which calls ``this.state.updatevideoList()`` to update VideoList component, therefore all the user would see a newly added video appearing in real-time. Test out your app!! Congratulation have just enable a real-time capability to your application.
+Here in ``App.tsx`` we can define ``.on("UpdateVideoList", () => {`` method, which calls ``this.state.updatevideoList()`` to update VideoList component, therefore all the user would see a newly added video appearing in real-time. Test out your app!! Congratulation have just enable a real-time capability to your application.
 
 This is only a glimpse of what SignalR can do for you.  Now try implement a real-time update favorite and video delete. 
 
