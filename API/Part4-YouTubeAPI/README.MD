@@ -103,7 +103,7 @@ String APIKey = "YOURAPIKEY";
 String YouTubeAPIURL = "https://www.googleapis.com/youtube/v3/videos?id=" + videoId + "&key=" + APIKey + "&part=snippet,contentDetails";
 
 // Use an http client to grab the JSON string from the web.
-String videoInfoJSON = new WebClient().DownloadString(APIurl);
+String videoInfoJSON = new WebClient().DownloadString(YouTubeAPIURL);
 
 // Using dynamic object helps us to more efficiently extract information from a large JSON String.
 dynamic jsonObj = JsonConvert.DeserializeObject<dynamic>(videoInfoJSON);
