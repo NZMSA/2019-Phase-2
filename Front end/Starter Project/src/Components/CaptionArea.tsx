@@ -66,9 +66,25 @@ export default class CaptionArea extends React.Component<IProps, IState>{
                 )
             });
         });
+        if (toRet.length === 0){
+            if(this.state.input.trim() === ""){
+                const error = <div><p>Sorry you need to search</p></div>
+                this.setState({body:error})
+            }else{
+                const error = <div><p>Sorry no results returned</p></div>
+                this.setState({body:error})
+            }
+        }else{
+            this.setState({body:toRet})
+        }
     }
 
-    
+    public handleClick = (url:any,time:any) =>{
+        window.scrollTo(0,0)
+        this.props.play(url+"&t="+time+"s")
+    }
+
+
 
     public render() {
         return (
