@@ -2,8 +2,7 @@
 
 
 <p align="center">
-<img style="width: 400px" src="imgs/signalr-logo.svg" />
-<img style="width: 400px" src="imgs/signalr-uses.svg" />
+<img style="width: 600px" src="imgs/signalr-logo.png" /><img style="width: 600px" src="imgs/signalr-uses.png" />
 </p>
 
 
