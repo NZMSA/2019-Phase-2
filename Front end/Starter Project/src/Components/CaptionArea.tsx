@@ -115,7 +115,17 @@ export default class CaptionArea extends React.Component<IProps, IState>{
                     </div>
                 </div>
                 <br/>
-                hello
+                <table className="table">
+                    <tr>
+                        <th>Time</th>
+                        <th>Caption</th>
+                        <th>Video</th>
+                    </tr>
+                    <tbody className="captionTable">
+                            {this.state.body}
+                    </tbody>
+                </table>
+            </div>
             </div>
         )
     }

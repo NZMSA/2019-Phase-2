@@ -72,7 +72,7 @@ class App extends React.Component<{}, IState>{
             <VideoList play = {this.updateURL} mount={this.videoList}/>
           </div>
         </div>
-        {/* */}
+        <CaptionArea play={this.updateURL} currentVideo={this.state.playingUrl}/>
       </div>
     </div>)
   }
