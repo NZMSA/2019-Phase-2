@@ -45,7 +45,7 @@ Install `Microsoft.AspNetCore.SignalR;` in the solution NuGet Packages manager.
     <img width="700px" src="imgs/install-signalr.png" />
 </p>
 
-Under your ScribrAPI project, add a new folder called ``CentralHub``, and add a new **C#** class file - ``CentralHub.cs``. import the package by adding:
+Under your ScribrAPI project, add a new folder called ``CentralHub``, and add a new **C#** class file - ``SignalrHub.cs``. import the package by adding:
 
 ```C#
 using Microsoft.AspNetCore.SignalR;
@@ -56,9 +56,9 @@ Then make your class inherit from the ``Hub`` class.
 Add the following method.
 
 ```C#
-        public async Task ConnectToHub()
+        public async Task BroadcastMessage()
         {
-            await Clients.All.SendAsync("A new client connected.");
+            await Clients.All.SendAsync("Connected");
         }
 ```
 
@@ -76,7 +76,7 @@ namespace ScribrAPI.CentralHub
 {
     public class CentralHub : Hub
     {
-        public async Task ConnectToHub()
+        public async Task BroadcastMessage()
         {
             await Clients.All.SendAsync("Connected");
         }
@@ -85,7 +85,119 @@ namespace ScribrAPI.CentralHub
 ```  
 </details>
 
-This ``ConnectToHub()`` method, when called by client, SignalR hub will invoke a JavaScript method name ``Connected`` defined in all currently connected clients browser.
+This ``BroadcastMessage()`` method, when called by client, SignalR hub will invoke a JavaScript method name ``Connected`` defined in all currently connected clients browser.
+
+In ``Startup.cs``
+
+1. Under ``ConfigureServices()`` method add:
+
+```C#
+    //Registering Azure SignalR service
+    services.AddSignalR();
+```
+
+2. At the top of ``Configure()`` method  add:
+
+```c#
+     // Make sure the CORS middleware is ahead of SignalR.
+     app.UseCors(builder =>
+     {
+         builder.WithOrigins("http://localhost:3000")
+             .AllowAnyHeader()
+             .AllowAnyMethod()
+             .AllowCredentials();
+     });
+
+     // SignalR
+     app.UseFileServer();
+     app.UseSignalR(routes =>
+     {
+         routes.MapHub<SignalrHub>("/hub");
+     });
+```
+Above will add the rules to allow *CORS (Cross-Origin Resource Sharing)*, allowing web application running at one origin (domain) have permission to access selected resources from a server at a different origin. So you won't run into errors. 
+
+Make sure to swap ``localhost:3000`` with your local front-end port or url of your website (When deployed). This will allows our front-end JavaScript to communicate with the SignalR hub in our backend.
 
 ## Implementing a client-side JavaScript.
+
+Open up your front-end directory, and runs:
+
+```C#
+npm install @aspnet/signalr
+```
+
+To install a cliet-side SignalR package.
+
+In ``App.tsx`` we will add **hubConnection** state to ``interface IState``:
+
+```js
+interface IState {
+  hubConnection: any,
+  updateVideoList: any,
+  player: any,
+  playingURL: string,
+  videoList: object
+}
+```
+
+and create a SingalR connection in the constructor.
+
+```js
+class App extends React.Component<{}, IState>{
+  public signalR = require("@aspnet/signalr");
+  public constructor(props: any) {
+    super(props);
+    this.state = {
+      hubConnection: new this.signalR.HubConnectionBuilder().withUrl("https://localhost:44303/hub").build(),
+      player: null,
+      playingURL: "",
+      updateVideoList: null,
+      videoList: [],
+    }
+  }
+...
+```
+
+Here we are creating a connection object to our backend up which was routed to ``[ScribrAPI]/hub`` endpoint in the ``Startup.cs`` (Previous step). Make sure you swap this url with your backend.
+
+**Next,** create a ``componentDidMount`` method, which in React this gets called after the component is loaded. 
+
+```js
+  public componentDidMount = () => {
+
+    this.state.hubConnection.on("Connected", ()  => {
+      this.state.updateVideoList();
+      console.log('A new user has connected to the hub.');
+    });
+
+    this.state.hubConnection.start().then(() => this.state.hubConnection.invoke("BroadcastMessage"));
+}
+```
+
+Here, we are defining a signalR client-side method *Connect*, which gets executed when the method of the same name in our backend signalR hub gets called. Look at ``BroadcastMessage()`` method in the backend ``SignalrHub.cs`` you will see that:  
+
+```js
+await Clients.All.SendAsync("Connected");
+```
+
+Will execute method declared with ``.on("Connected", () => {`` on all connected clients. 
+
+Just after the ``Connected`` method in ``App.tsx`` add:
+
+```js
+this.state.hubConnection.start().then(() => this.state.hubConnection.invoke("BroadcastMessage"));
+```
+
+This is saying when the ``App.tsx`` component is mounted, starts a connection to the signalR hub, and then invoke ``BroadcastMessage()`` method in ``SignalrHub.cs`` (Which in turn execute ``.on("Connected", () => {`` on all clients.) Try launching both your frontend and backend, then open multiple browsers, you should now see a message in developer console *'A user has connected to the hub.'* everytime you open **another** new browser.
+
+<p align="center">
+    <img width="500px" src="imgs/signalr-connect.png" />
+</p>
+
+## Making adding a video happens in real-time.
+
+So, with the understanding of how SignalR works, we will apply the same mechanism to update all connected browsers **VideoList** component in real-time as soon as someone add a new video.
+
+
 

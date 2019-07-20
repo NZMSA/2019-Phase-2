@@ -6,6 +6,7 @@ import VideoList from 'src/Components/VideoList';
 import 'src/App.css'
 
 interface IState {
+  hubConnection: any,
   updateVideoList: any,
   player: any,
   playingURL: string
@@ -13,9 +14,11 @@ interface IState {
 }
 
 class App extends React.Component<{}, IState>{
+  public signalR = require("@aspnet/signalr");
   public constructor(props: any) {
     super(props);
     this.state = {
+      hubConnection: new this.signalR.HubConnectionBuilder().withUrl("https://localhost:44303/hub").build(),
       player: null,
       playingURL: "",
       updateVideoList: null,
@@ -31,7 +34,7 @@ class App extends React.Component<{}, IState>{
 
   public addVideo = (url: string) => {
     const body = {"url": url}
-    fetch("https://scriberapi.azurewebsites.net/api/Videos", {
+    fetch("https://localhost:44303/api/Videos", {
       body: JSON.stringify(body),
       headers: {
         Accept: "text/plain",
@@ -54,6 +57,17 @@ class App extends React.Component<{}, IState>{
   public listMounted = (callbacks: any) => {
     this.setState({ updateVideoList: callbacks })
   }
+
+
+  public componentDidMount = () => {
+
+    this.state.hubConnection.on("Connect", ()  => {
+      this.state.updateVideoList();
+      console.log('A new user has connected to the hub.');
+    });
+
+    this.state.hubConnection.start().then(() => this.state.hubConnection.invoke("BroadcastMessage"));
+}
 
   public render() {
     return (<div>
