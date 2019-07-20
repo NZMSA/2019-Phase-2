@@ -167,7 +167,6 @@ Here we are creating a connection object to our backend up which was routed to `
   public componentDidMount = () => {
 
     this.state.hubConnection.on("Connected", ()  => {
-      this.state.updateVideoList();
       console.log('A new user has connected to the hub.');
     });
 
@@ -198,6 +197,60 @@ This is saying when the ``App.tsx`` component is mounted, starts a connection to
 ## Making adding a video happens in real-time.
 
 So, with the understanding of how SignalR works, we will apply the same mechanism to update all connected browsers **VideoList** component in real-time as soon as someone add a new video.
+
+In ``SignalrHub.cs`` of our backend API, creates another signalr hub method ``AddVideo()`` which when called, execute ``UpdateVideoList`` method on the client-side.
+
+```C#
+    public async Task AddVideo()
+    {
+        await Clients.All.SendAsync("UpdateVideoList");
+    }
+```
+
+In ``componentDidMount = () => {`` for ``App.tsx`` add another client-side signalR method.
+
+```js
+  public componentDidMount = () => {
+
+    this.state.hubConnection.on("Connected", ()  => {
+      console.log('A new user has connected to the hub.');
+    });
+
+    this.state.hubConnection.on("UpdateVideoList", ()  => {
+        this.state.updateVideoList();
+        console.log('A new video has been added!');
+    });
+
+    this.state.hubConnection.start().then(() => this.state.hubConnection.invoke("ConnectToHub"));
+}
+```
+
+So we know that a video is added when ``addVideo`` method in ``App.tsx`` is invoked, so after a new video is added also invoke a hub method `VideoAdded`: 
+
+```js
+  public addVideo = (url: string) => {
+    const body = {"url": url}
+    fetch("https://localhost:44303/api/Videos", {
+      body: JSON.stringify(body),
+      headers: {
+        Accept: "text/plain",
+        "Content-Type": "application/json"
+      },
+      method: "POST"
+    }).then(() => {
+      this.state.updateVideoList();
+    }).then(() => {this.state.hubConnection.invoke("VideoAdded")});
+  }
+```
+
+
+. Here in ``App.tsx`` we can define ``.on("UpdateVideoList", () => {`` method, which calls ``this.state.updatevideoList()`` to update VideoList component, therefore all the user would see a newly added video appearing in real-time. Test out your app!! Congratulation have just enable a real-time capability to your application.
+
+This is only a glimpse of what SignalR can do for you.  Now try implement a real-time update favorite and video delete. 
+
+Go forth and implement a wild and crazy stuffs!
+
+
 
 
 

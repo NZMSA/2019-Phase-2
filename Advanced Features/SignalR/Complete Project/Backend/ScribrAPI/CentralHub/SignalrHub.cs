@@ -13,9 +13,9 @@ namespace ScribrAPI.CentralHub
             await Clients.All.SendAsync("Connect");
         }
 
-        public async Task AddVideo()
+        public async Task VideoAdded()
         {
-            await Clients.All.SendAsync("VideoAdded");
+            await Clients.All.SendAsync("UpdateVideoList");
         }
     }
 }
