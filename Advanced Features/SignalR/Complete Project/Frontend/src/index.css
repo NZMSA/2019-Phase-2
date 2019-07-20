@@ -1,0 +1,71 @@
+@import url('https://fonts.googleapis.com/css?family=Roboto&display=swap');
+
+body {
+  margin: 0;
+  padding: 0;
+  font-family: 'Roboto', sans-serif;
+}
+
+.header {
+  background-color: #F8F8F8;
+  padding-top: 10px;
+  margin-bottom: 20px;
+}
+
+h1 {
+  font-size: 28px;
+  font-weight: 600;
+  color: #6D6D6D;
+  float: left;
+}
+
+.red-heading {
+  color: #C1263A;
+}
+
+.play-heading {
+  margin-left: 20px;
+  margin-top: 10px;
+}
+
+.table {
+  font-size: 12px;
+}
+
+.table td, .table th {
+  padding: 7px;
+}
+
+.video-list {
+  background-color: #F5F5F5;
+  overflow-x: hidden;
+  overflow-y: scroll;
+  height: 400px;
+}
+
+.video-list button {
+  border: none;
+  background-color: #F5F5F5;
+}
+
+.video-list > .table {
+  cursor: pointer;
+}
+
+.video-list-close {
+  width: 60px;
+}
+
+.caption-area {
+  background-color: #F5F5F5;
+  margin-top: 20px;
+  padding: 30px;
+}
+
+.captionTable {
+  cursor: pointer;
+}
+
+.player {
+  background-color: black;
+}
