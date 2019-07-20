@@ -19,9 +19,9 @@ export default class CaptionArea extends React.Component<IProps, IState>{
     public constructor(props: any) {
         super(props);
         this.state = {
+            body:[],
             input:"",
             result:[],
-            body:[],
         }
     }
 
