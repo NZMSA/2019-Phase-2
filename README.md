@@ -3,7 +3,7 @@ The official repository and source of knowledge for MSA students taking part in 
 
 # Assignment
 
-Full assignment brief can be found [here](https://github.com/NZMSA/2019-Phase-2/blob/master/Assessment/Advanced%20Training%202019%20Assessment%20Criteria.pdf). Submissions close **11:59pm 17th August 2019**.
+Full assignment brief can be found [here](https://github.com/NZMSA/2019-Phase-2/blob/master/Assessment/Advanced%20Training%202019%20Assessment%20Criteria.pdf). Submissions close **8am 17th August 2019**.
 
 # Your Device
 
