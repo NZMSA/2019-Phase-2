@@ -174,7 +174,7 @@ Here we are creating a connection object to our backend up which was routed to `
 }
 ```
 
-Here, we are defining a signalR client-side method *Connect*, which gets executed when the method of the same name in our backend signalR hub gets called. Look at ``BroadcastMessage()`` method in the backend ``SignalrHub.cs`` you will see that:  
+Here, we are defining a signalR client-side method *Connected*, which gets executed when the method of the same name in our backend signalR hub gets called. Look at ``BroadcastMessage()`` method in the backend ``SignalrHub.cs`` you will see that:  
 
 ```js
 await Clients.All.SendAsync("Connected");
@@ -248,7 +248,7 @@ Here in ``App.tsx`` we can define ``.on("UpdateVideoList", () => {`` method, whi
 
 This is only a glimpse of what SignalR can do for you.  Now try implement a real-time update favorite and video delete. 
 
-Go forth and implement a wild and crazy stuffs!
+Go forth and implement wild and crazy stuffs!
 
 
 
