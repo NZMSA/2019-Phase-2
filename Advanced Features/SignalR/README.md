@@ -1,4 +1,4 @@
-# SignalR: Enabling real-time capability with your web application. 
+# SignalR: Enabling real-time capability in your web application. 
 
 
 <p align="center">
