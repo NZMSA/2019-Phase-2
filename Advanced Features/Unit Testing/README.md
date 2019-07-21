@@ -39,25 +39,25 @@ File -> New -> Project
 
 Scroll down to MSTest Test Project (.Net Core), select it, then click "Next".
 
-![Create New Project window - select MS Test Project and click Next](https://github.com/NZMSA/2019-Phase-2/blob/master/Unit%20Testing/images/CreateMSTestProject.png)
+![Create New Project window - select MS Test Project and click Next](https://github.com/NZMSA/2019-Phase-2/blob/master/Advanced%20Features/Unit%20Testing/images/CreateMSTestProject.png)
 
 Give the project a name. Make sure to select "Add to solution" as shown in the image below, then click "Create".
 
-![Project configuration - give it a name and click Create](https://github.com/NZMSA/2019-Phase-2/blob/master/Unit%20Testing/images/CreateMSTestProject2.png)
+![Project configuration - give it a name and click Create](https://github.com/NZMSA/2019-Phase-2/blob/master/Advanced%20Features/Unit%20Testing/images/CreateMSTestProject2.png)
 
 ### Setting up the Test Project
 
 Start by adding a reference from the newly created test project to the API project. Right-click on the unit test project in the solution explorer:
 
-![Right-click on the unit test project](https://github.com/NZMSA/2019-Phase-2/blob/master/Unit%20Testing/images/ProjectInSolExplorer.png)
+![Right-click on the unit test project](https://github.com/NZMSA/2019-Phase-2/blob/master/Advanced%20Features/Unit%20Testing/images/ProjectInSolExplorer.png)
 
 Then go Add -> Reference...
 
-![Hover over Add, then click Reference](https://github.com/NZMSA/2019-Phase-2/blob/master/Unit%20Testing/images/AddReference.png)
+![Hover over Add, then click Reference](https://github.com/NZMSA/2019-Phase-2/blob/master/Advanced%20Features/Unit%20Testing/images/AddReference.png)
 
 In the Reference Manager window select the API project as show in the image below. Then select "Ok".
 
-![Reference Manager Window - tick the ScribrAPI project and click Ok](https://github.com/NZMSA/2019-Phase-2/blob/master/Unit%20Testing/images/AddMainProjectReference.png)
+![Reference Manager Window - tick the ScribrAPI project and click Ok](https://github.com/NZMSA/2019-Phase-2/blob/master/Advanced%20Features/Unit%20Testing/images/AddMainProjectReference.png)
 
 Now we are going to add a couple of packages that will let us use a mock database (More on this in a bit).
 Right-click on the project solution and select "Manage NuGet Packages for solution"
