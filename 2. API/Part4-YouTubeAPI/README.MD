@@ -182,6 +182,8 @@ For now, go back to `PostVideo()` and add in the following code.
 public async Task<ActionResult<Video>> PostVideo([FromBody]URLDTO data)
 {
     Video video;
+    String videoURL;
+    String videoId;
     try
     {
         // Constructing the video object from our helper function
