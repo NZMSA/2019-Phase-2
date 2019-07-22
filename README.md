@@ -6,9 +6,9 @@ The official repository and source of knowledge for MSA students taking part in 
 Full assignment brief can be found [here](https://github.com/NZMSA/2019-Phase-2/blob/master/Assessment/Advanced%20Training%202019%20Assessment%20Criteria.pdf). Submissions close **8am 17th August 2019**.
 
 # Phase 2 Training Recording
-[Day 1](https://youtu.be/Z6U6g1wn8RE) 
 
-[Day 2](https://youtu.be/-tvmHvEZK1c)
+* [Day 1](https://youtu.be/Z6U6g1wn8RE) 
+* [Day 2](https://youtu.be/-tvmHvEZK1c)
 
 # Your Device
 
