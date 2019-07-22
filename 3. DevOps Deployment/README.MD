@@ -68,14 +68,16 @@ Once the build and release stages are complete, click on the link for your web a
 
 ## Testing
 
-Hi guys! Marc here just for this one section. Azure DevOps is about to get even more magical! If you aren't doing Unit Testing, then don't worry about this (although, if you're using DevOps I highly recommend doing Unit Testing as they work really well together). All you need to do to setup automated testing before deployment is to put your test project in the same github repo as the the rest of the project, like so:
+Hi guys! Marc here just for this one section. Azure DevOps is about to get even more magical! If you aren't doing Unit Testing, then **don't worry about this** (although, if you're using DevOps I highly recommend doing Unit Testing as they work really well together). All you need to do to setup automated testing before deployment is to put your test project in the same github repo as the the rest of the project, like so:
 
 ![](https://i.imgur.com/Mmo2zaM.png)
 
-However, it turns out that I (somewhat embarrasingly) went against the usual convension for the name of test projects in the .NET realm, so we need to change the regex pattern that Azure DevOps uses to look for test projects.
-
 Go to the overview of your DevOps project and click Pipelines -> Builds
 ![](https://i.imgur.com/HswShUc.png)
+
+It turns out that when I first setup the Unit Test project, I went against the usual convention for the name of test projects. The Unit Test documentation was updated before the phase-2 training day, so you should be fine in this regards. However, if you called your test project something else and would like to keep it with that name, follow the steps in the following hidden section:
+
+<details>
 
 Above the build list, click edit to edit the pipeline
 ![](https://i.imgur.com/DSduSfg.png)
@@ -86,7 +88,15 @@ As you can see here, the pipeline is set to look for the pattern ```**/*UnitTest
 We need this to match the Unit Test project, so change it to ``**/UnitTesting*/*.csproj``` Once you've done that, click Save & Queue. There will be another popup asking you to confirm the save.
 ![](https://i.imgur.com/1PKml8W.png)
 
-You will be automatically taken to the summary of the build you just queued. Click on the Test job
+
+You will be automatically taken to the summary of the build you just queued and don't need to worry about the next step. 
+
+</details>
+
+In your pipeline's builds overview, click on the most recent one, which will have been generated at the most recent push to your repo.
+![](https://i.imgur.com/rd0rdEr.png)
+
+Click on the Test job
 ![](https://i.imgur.com/3RfICPQ.png)
 
 As you can see, the tests ran and were successful. Hurrah!
