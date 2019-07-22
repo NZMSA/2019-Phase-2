@@ -41,7 +41,7 @@ Scroll down to MSTest Test Project (.Net Core), select it, then click "Next".
 
 ![Create New Project window - select MS Test Project and click Next](https://github.com/NZMSA/2019-Phase-2/blob/master/Advanced%20Features/Unit%20Testing/images/CreateMSTestProject.png)
 
-Give the project a name. Make sure to select "Add to solution" as shown in the image below, then click "Create".
+Give the project a name in the format "[project being tested]UnitTests". The reason it should end in UnitTests is so that later on when we commit and push our unit test project, Azure DevOps can find it and run it automatically. Make sure to select "Add to solution" as shown in the image below, then click "Create".
 
 ![Project configuration - give it a name and click Create](https://github.com/NZMSA/2019-Phase-2/blob/master/Advanced%20Features/Unit%20Testing/images/CreateMSTestProject2.png)
 
@@ -261,13 +261,13 @@ public async Task TestGetSuccessfully()
 ```csharp
 // unfortunately, it can be hard to avoid test method names that are also descriptive
 [TestMethod]
-public async Task TestPutMemeItemNoContentStatusCode()
+public async Task TestPutTranscriptionNoContentStatusCode()
 {
     using (var context = new scriberContext(options))
     {
-        string title = "this is now a different phrase";
+        string newPhrase = "this is now a different phrase";
         Transcription transcription1 = context.Transcription.Where(x => x.Phrase == transcriptions[0].Phrase).Single();
-        transcription1.Phrase = title;
+        transcription1.Phrase = newPhrase;
 
         TranscriptionsController transcriptionsController = new TranscriptionsController(context);
         IActionResult result = await transcriptionsController.PutTranscription(transcription1.TranscriptionId, transcription1) as IActionResult;
